@@ -12,3 +12,7 @@ export class HomePage {
   }
 
 }
+
+import {Game} from './game';
+
+new Game();
