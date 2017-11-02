@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import {initEvents} from './events';
 import {loadImages} from './loadImages';
+import {generateFeatures} from './mapGen/dungeonFeatures';
 
 import * as screens from './screens';
 
@@ -9,6 +10,8 @@ export class Game {
     width : number;
     height : number;
     constructor(){
+        generateFeatures();
+
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
         this.app = new PIXI.Application(window.innerWidth,window.innerHeight,{backgroundColor:0x000000});

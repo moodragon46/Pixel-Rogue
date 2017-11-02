@@ -1,6 +1,6 @@
 import {features} from './dungeonFeaturesRaw';
 
-const cachedFeatures:Array<Array<Array<string>>> = [];
+export const cachedFeatures:Array<Array<Array<string>>> = [];
 
 export function generateFeatures () {
     let currentFeature:Array<Array<string>> = [[]];

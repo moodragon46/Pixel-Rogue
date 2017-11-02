@@ -1,6 +1,8 @@
 import * as tiles from './tiles';
 import * as PIXI from 'pixi.js';
 
+import {cachedFeatures} from './mapGen/dungeonFeatures';
+
 export const width = 64;
 export const height = 64;
 
