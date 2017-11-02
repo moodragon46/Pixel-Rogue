@@ -71,7 +71,28 @@ function rotateRight(map:Array<Array<string>>) : Array<Array<string>> {
         }
     }
 
-    return snip(newMap,lowestX,lowestY);
+    const finalUnswitched = snip(newMap,lowestX,lowestY);
+    const final = finalUnswitched.concat([]);
+    for(let i=0;i<finalUnswitched.length;i++){
+        for(let j=0;j<width;j++){
+            switch(finalUnswitched[i][j]){
+                case "L":
+                    final[i][j] = "U";
+                    break;
+                case "U":
+                    final[i][j] = "R";
+                    break;
+                case "R":
+                    final[i][j] = "D";
+                    break;
+                case "D":
+                    final[i][j] = "L";
+                    break;
+            }
+        }
+    }
+
+    return final;
 }
 
 function snip(map : Array<Array<string>>, minX : number, minY : number) : Array<Array<string>> {
