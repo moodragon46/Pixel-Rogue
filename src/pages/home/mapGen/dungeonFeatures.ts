@@ -1,23 +1,67 @@
 import {features} from './dungeonFeaturesRaw';
 
-export const cachedFeatures:Array<Array<Array<string>>> = [];
+let cachedFeaturesNonLinked:Array<Array<Array<string>>> = [];
+export let cachedFeatures:Array<Feature> = [];
+
+class Feature {
+    leftLinks:Array<Array<number>>;
+    rightLinks:Array<Array<number>>;
+    upLinks:Array<Array<number>>;
+    downLinks:Array<Array<number>>;
+
+    constructor (public stringMap:Array<Array<string>>){
+        this.generateLinks();
+    }
+
+    generateLinks(){
+        this.upLinks = [];
+        this.downLinks = [];
+        this.leftLinks = [];
+        this.rightLinks = [];
+
+        for(let y=0;y<this.stringMap.length;y++){
+            for(let x=0;x<this.stringMap[y].length;x++){
+                switch(this.stringMap[y][x]){
+                    case "U":
+                        this.upLinks.push([x,y]);
+                        break;
+                    case "D":
+                        this.downLinks.push([x,y]);
+                        break;
+                    case "L":
+                        this.leftLinks.push([x,y]);
+                        break;
+                    case "R":
+                        this.rightLinks.push([x,y]);
+                        break;
+                }
+            }
+        }
+    }
+}
 
 export function generateFeatures () {
+    //reset
+    cachedFeatures = [];
+    cachedFeaturesNonLinked = [];
+
     let currentFeature:Array<Array<string>> = [[]];
     for(let i=0;i<features.length;i++){
         if(features[i]==="\n"){
             currentFeature.push([]);
         }else if(features[i]==="N"){
             //Next feature
-            cachedFeatures.push(currentFeature.concat([]));
+            cachedFeaturesNonLinked.push(currentFeature.concat([]));
             currentFeature = [[]];
         }else {
             currentFeature[currentFeature.length-1].push(features[i]);
         }
     }
+    // Push final one
+    cachedFeaturesNonLinked.push(currentFeature.concat([]));
 
-    //Now add all rotations of the features to the cachedFeatures
-    const originalFeatures = cachedFeatures.concat([]);
+    //Now add all rotations of the features to the cachedFeaturesNonLinked
+    const originalFeatures = cachedFeaturesNonLinked.concat([]);
 
     for(let i=0;i<originalFeatures.length;i++){
         // Assuming the original was up
@@ -25,7 +69,12 @@ export function generateFeatures () {
         const down = rotateRight(right);
         const left = rotateRight(down);
 
-        cachedFeatures.push(right,down,left);
+        cachedFeaturesNonLinked.push(right,down,left);
+    }
+
+    // Save
+    for(let i=0;i<cachedFeaturesNonLinked.length;i++){
+        cachedFeatures.push(new Feature(cachedFeaturesNonLinked[i]));
     }
 
     // Finished !

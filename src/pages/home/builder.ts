@@ -7,7 +7,7 @@ export const width = 64;
 export const height = 64;
 
 export function genDungeon (stage:PIXI.Container) : tiles.Tile[][] {
-
+    // Create basic arena
     const stringDungeon : string[][] = [];
     for(let i=0;i<height;i++){
         stringDungeon.push([]);
@@ -15,6 +15,9 @@ export function genDungeon (stage:PIXI.Container) : tiles.Tile[][] {
             stringDungeon[i][j] = (i===0||i+1===height||j===0||j+1===width)?"#":" ";
         }
     }
+
+    // Add features
+    console.log(cachedFeatures);
 
 
     // Generate dungeon from stringmap

@@ -78,7 +78,7 @@ export class Game extends Screen {
         this.mapLayer = new PIXI.Container();
         this.dungeon = builder.genDungeon(this.mapLayer);
         
-        this.mapLayer.scale.set(4,4);
+        this.mapLayer.scale.set(scale/2,scale/2);
         this.mapLayer.position.set(this.sizeX/2,this.sizeY/2);
 
 

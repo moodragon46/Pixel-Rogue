@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import * as builder from './builder';
 
 export class Tile extends PIXI.Sprite {
     walkable : boolean;
@@ -15,7 +16,7 @@ export class Tile extends PIXI.Sprite {
     move(newX:number,newY:number){
         this.tileX = newX;
         this.tileY = newY;
-        this.position.set(newX*16-8,newY*16-8);
+        this.position.set(newX*16-8 - 8*builder.width,newY*16-8 - 8*builder.height);
     }
 }
 
