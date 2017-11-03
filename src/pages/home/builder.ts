@@ -17,7 +17,7 @@ export function genDungeon (stage:PIXI.Container) : tiles.Tile[][] {
     }
 
     // Add features
-    console.log(cachedFeatures);
+    
 
 
     // Generate dungeon from stringmap

@@ -14,6 +14,9 @@ export class Game {
 
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
+        // Disable loading element
+        document.getElementById("loading").style.display = "none";
+
         this.app = new PIXI.Application(window.innerWidth,window.innerHeight,{backgroundColor:0x000000});
         document.body.appendChild(this.app.view);
         initEvents(this.app.view);
